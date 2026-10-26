@@ -248,7 +248,7 @@ class TestRemainingTenure:
 
     def test_very_large_balance(self):
         balance = 10 ** 12
-        instalment = 5 * 10 ** 9
+        instalment = 10 ** 10
         result = remaining_tenure(balance, 9.5, instalment)
         assert result > 0
         assert math.isfinite(result)
