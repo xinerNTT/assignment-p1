@@ -192,7 +192,7 @@ def remaining_tenure(balance: float, annual_rate: float, instalment: float) -> i
         >>> remaining_tenure(100000, 9.5, 3000)
         35
     """
-    r = annual_rate / 100
+    r = _monthly_rate(annual_rate)
     if balance <= 0:
         return 0
     if r == 0:
