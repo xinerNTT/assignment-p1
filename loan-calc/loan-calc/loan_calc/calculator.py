@@ -243,13 +243,13 @@ def prepayment_savings(principal: float, annual_rate: float, tenure_months: int,
     original_left = tenure_months - prepay_month
     interest_paid_so_far = sum(row["interest"] for row in sched[:prepay_month])
     original_interest = total_interest(principal, annual_rate, tenure_months)
-    new_total = instalment * prepay_month + prepay_amount + instalment * months_left
-    new_interest = new_total - principal
+    interest_after = round(instalment * months_left - new_balance, 2) if new_balance > 0 else 0.0
+    interest_saved = round(original_interest - interest_paid_so_far - interest_after, 2)
     return {
         "emi": instalment,
         "months_saved": original_left - months_left,
         "new_tenure": prepay_month + months_left,
-        "interest_saved": round(original_interest - new_interest, 2),
+        "interest_saved": interest_saved,
         "interest_paid_before_prepayment": round(interest_paid_so_far, 2),
     }
 
